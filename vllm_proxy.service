@@ -1,0 +1,14 @@
+[Unit]
+Description=vLLM Proxy for OpenClaw
+After=network.target
+
+[Service]
+Type=simple
+User=tomlee
+WorkingDirectory=/home/tomlee/vllm-proxy-openclaw
+ExecStart=/usr/bin/python3 /home/tomlee/vllm-proxy-openclaw/vllm_proxy.py
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
