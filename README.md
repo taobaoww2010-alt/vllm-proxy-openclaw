@@ -135,6 +135,56 @@ sudo systemctl start vllm_proxy
 
 ---
 
+## 代理服务配置参数
+
+| 环境变量 | 默认值 | 说明 |
+|---------|--------|------|
+| `VLLM_URL` | `http://127.0.0.1:8000` | vLLM 服务地址 |
+| `PORT` | `8001` | 代理服务端口 |
+
+---
+
+## API 接口说明
+
+### 1. /health 健康检查
+
+```bash
+curl http://localhost:8001/health
+```
+
+返回: `{"status": "ok"}`
+
+### 2. /v1/models 模型列表
+
+```bash
+curl http://localhost:8001/v1/models
+```
+
+### 3. /v1/chat/completions 聊天接口
+
+```bash
+curl -X POST http://localhost:8001/v1/chat/completions \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "/models/Qwen3-32B-AWQ",
+    "messages": [{"role": "user", "content": "你好"}],
+    "max_tokens": 512
+  }'
+```
+
+### 4. /v1/messages 消息接口 (OpenClaw 专用)
+
+```bash
+curl -X POST http://localhost:8001/v1/messages \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "/models/Qwen3-32B-AWQ",
+    "messages": [{"role": "user", "content": "你好"}]
+  }'
+```
+
+---
+
 ## 第五部分：测试
 
 ### 测试 vLLM
@@ -315,6 +365,56 @@ sudo systemctl start vllm_proxy
 - **API Type**: `openai-completions`
 - **API Key**: Any value (e.g., `sk-any`)
 - **maxTokens**: 512-2048 recommended
+
+---
+
+## Proxy Service Configuration
+
+| Environment Variable | Default | Description |
+|---------------------|---------|-------------|
+| `VLLM_URL` | `http://127.0.0.1:8000` | vLLM server address |
+| `PORT` | `8001` | Proxy service port |
+
+---
+
+## API Endpoints
+
+### 1. /health Health Check
+
+```bash
+curl http://localhost:8001/health
+```
+
+Returns: `{"status": "ok"}`
+
+### 2. /v1/models Model List
+
+```bash
+curl http://localhost:8001/v1/models
+```
+
+### 3. /v1/chat/completions Chat API
+
+```bash
+curl -X POST http://localhost:8001/v1/chat/completions \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "/models/Qwen3-32B-AWQ",
+    "messages": [{"role": "user", "content": "Hello"}],
+    "max_tokens": 512
+  }'
+```
+
+### 4. /v1/messages Messages API (OpenClaw)
+
+```bash
+curl -X POST http://localhost:8001/v1/messages \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "/models/Qwen3-32B-AWQ",
+    "messages": [{"role": "user", "content": "Hello"}]
+  }'
+```
 
 ---
 
