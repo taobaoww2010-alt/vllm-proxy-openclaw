@@ -117,13 +117,15 @@ cd /home/tomlee/vllm-proxy-openclaw
 python3 vllm_proxy.py
 ```
 
-**方式二：使用 systemd**
+**方式二：使用 systemd (推荐)**
 ```bash
 sudo cp vllm_proxy.service /etc/systemd/system/
 sudo systemctl daemon-reload
 sudo systemctl enable vllm_proxy
 sudo systemctl start vllm_proxy
 ```
+
+**开机自启**: 服务已配置 `Restart=always`，重启服务器后自动运行
 
 ### 4. OpenClaw 配置
 
@@ -350,13 +352,15 @@ cd /home/tomlee/vllm-proxy-openclaw
 python3 vllm_proxy.py
 ```
 
-**Option 2: Systemd**
+**Option 2: Systemd (Recommended)**
 ```bash
 sudo cp vllm_proxy.service /etc/systemd/system/
 sudo systemctl daemon-reload
 sudo systemctl enable vllm_proxy
 sudo systemctl start vllm_proxy
 ```
+
+**Auto-start on boot**: Service is configured with `Restart=always`, will auto-run after server reboot
 
 ### 4. OpenClaw Configuration
 
